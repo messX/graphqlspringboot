@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "72f92ef4-1243-4cd0-b0d5-c0a382ea68a0",
+		"name": "GraphQL collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "272965"
+	},
+	"item": [
+		{
+			"name": "mutations",
+			"item": [
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation saveProduct ($name: String!, $description: String!, $status: String, $currency: String!, $price: Float!, $imageUrls: [String], $videoUrls: [String], $stock: Int!) {\n    saveProduct (product: {name: $name, description: $description, status: $status, currency: $currency, price :$price, imageUrls: $imageUrls, videoUrls: $videoUrls, stock: $stock}) {\n         name\n        description\n        status\n        currency\n        price\n        imageUrls\n        videoUrls\n        stock\n    }\n}",
+								"variables": "{\n  \"name\": \"new post\",\n  \"description\": \"new post text\",\n  \"status\": \"new\",\n  \"currency\": \"INR\",\n  \"price\": 100,\n  \"stock\": 10\n}"
+							}
+						},
+						"url": "http://localhost:8082/graphql"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "queries",
+			"item": [
+				{
+					"name": "get products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query products ($size: Int, $page: Int) {\r\n        products(size: $size, page: $page){\r\n        id\r\n        name\r\n        description\r\n        status\r\n        currency\r\n        price\r\n        imageUrls\r\n        videoUrls\r\n        stock\r\n        averageRating\r\n    }\r\n}",
+								"variables": "{\r\n  \"size\": 5,\r\n  \"page\": 0\r\n}"
+							}
+						},
+						"url": "http://localhost:8082/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "recent products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query products ($size: Int, $page: Int) {\n        products(size: $size, page: $page){\n        id\n        name\n        description\n        status\n    }\n}",
+								"variables": "{\n  \"size\": 5,\n  \"page\": 0\n}"
+							}
+						},
+						"url": "http://localhost:8082/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "recent products with filter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetProductByName ($name: String!) {\n  getProductByName (name: $name) {\n        id\n        name\n        description\n        status\n  }\n}",
+								"variables": "{\n  \"name\": \"Wallet\"\n}"
+							}
+						},
+						"url": "http://localhost:8082/graphql"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
